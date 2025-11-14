@@ -134,6 +134,37 @@
             color: var(--text-light);
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu Styles */
+        .nav-menu.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .nav-menu.active .nav-link {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            width: 100%;
+            display: block;
+        }
+
+        .nav-menu.active .nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-menu.active .nav-link::after {
+            display: none;
         }
 
         /* Hero Section */
@@ -970,6 +1001,10 @@
             .nav-menu {
                 display: none;
             }
+
+            .nav-menu.active {
+                display: flex;
+            }
             
             .mobile-menu-btn {
                 display: block;
@@ -1035,76 +1070,35 @@
             
             /* Card padding adjustments */
             .skill-card, 
-            .project-card, 
+            .project
+                        .project-card,
             .contact-card {
                 padding: 1.5rem;
             }
             
             .project-header {
                 padding: 1rem 1rem 0.5rem;
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: start;
             }
             
-            .project-header h3 {
-                font-size: 1.2rem;
-            }
-            
+            .project-card p,
             .project-features {
                 padding: 0 1rem 1rem;
             }
             
-            .tech-tags {
-                gap: 0.5rem;
-            }
-            
-            .tech-tag {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-            
-            /* About section mobile fixes */
-            .about-content {
-                text-align: left;
-            }
-            
-            .about-text {
-                font-size: 0.95rem;
-            }
-            
+            /* Timeline adjustments */
             .timeline-item {
                 flex-direction: column;
                 gap: 0.5rem;
             }
             
             .timeline-year {
-                min-width: auto;
                 align-self: flex-start;
             }
             
-            /* Contact section mobile fixes */
-            .contact-text {
-                padding: 0 10px;
-            }
-            
-            .contact-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-            
-            .contact-info h4 {
-                font-size: 1.1rem;
-            }
-            
-            /* Footer mobile fixes */
+            /* Footer adjustments */
             .footer-links {
+                flex-direction: column;
                 gap: 1rem;
-            }
-            
-            .footer-links a {
-                font-size: 0.9rem;
             }
             
             .social-links {
@@ -1114,15 +1108,13 @@
             .social-link {
                 width: 45px;
                 height: 45px;
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
         }
 
-        /* Extra small devices */
         @media (max-width: 480px) {
             .hero {
                 padding: 100px 0 60px;
-                min-height: 90vh;
             }
             
             .hero-title {
@@ -1134,7 +1126,7 @@
             }
             
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.7rem;
             }
             
             .profile-container {
@@ -1142,50 +1134,16 @@
                 height: 250px;
             }
             
-            .container {
+            .nav-container {
                 padding: 0 15px;
             }
             
-            section {
-                padding: 60px 0;
-            }
-            
-            .skill-card, 
-            .project-card, 
-            .contact-card {
-                padding: 1.2rem;
-            }
-            
-            .project-image {
-                height: 180px;
-            }
-            
-            .hero-buttons {
-                gap: 0.8rem;
-            }
-            
-            .btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .education-item {
-                font-size: 0.85rem;
-            }
-            
-            .nav-logo .logo-name {
-                font-size: 1rem;
-            }
-            
-            .footer-content {
-                margin-bottom: 1.5rem;
-            }
-            
-            .footer-text {
-                font-size: 0.9rem;
+            .container {
+                padding: 0 15px;
             }
         }
 
+        /* Additional Animations */
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
@@ -1196,26 +1154,132 @@
                 transform: translateX(0);
             }
         }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            border-top: 3px solid var(--secondary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+            background: var(--gradient-purple);
+        }
+
+        /* Enhanced Focus States for Accessibility */
+        button:focus,
+        .btn:focus,
+        .nav-link:focus,
+        .social-link:focus {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,
+            .hero-buttons,
+            .back-to-top,
+            .footer {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .hero {
+                padding: 50px 0;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">D</span>
-                <span class="logo-name">Dzaky</span>
+                <div class="logo-text">MA</div>
+                <div class="logo-name">Muhammad Dzaky Althaf</div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#skills" class="nav-link">Keahlian</a></li>
-                <li><a href="#projects" class="nav-link">Proyek</a></li>
-                <li><a href="#about" class="nav-link">Tentang</a></li>
-                <li><a href="#contact" class="nav-link">Kontak</a></li>
-            </ul>
-            <button class="mobile-menu-btn">
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -1225,29 +1289,35 @@
             <div class="hero-content">
                 <h1 class="hero-title">Muhammad Dzaky Althaf</h1>
                 <p class="hero-subtitle">Game Developer & Software Engineer</p>
-                <p class="hero-description">Mahasiswa Teknik Informatika di Universitas Negeri Semarang yang passionate dalam ngoding dan bikin solusi kreatif lewat programming.</p>
+                <p class="hero-description">
+                    Passionate game developer and software engineer with expertise in creating immersive gaming experiences 
+                    and robust software solutions. Currently pursuing my education while working on innovative projects.
+                </p>
+                
                 <div class="education-info">
                     <div class="education-item">
-                        <strong>🎓 Pendidikan:</strong>
-                        <span>SMA Negeri 1 Tayu → Universitas Negeri Semarang</span>
+                        <strong>Education:</strong> Mahasiswa S1 Teknik Informatika
                     </div>
                     <div class="education-item">
-                        <strong>💻 Program Studi:</strong>
-                        <span>Teknik Informatika</span>
+                        <strong>Institution:</strong> Universitas Pendidikan Nasional
+                    </div>
+                    <div class="education-item">
+                        <strong>Focus:</strong> Game Development, Software Engineering, AI Integration
                     </div>
                 </div>
+                
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">Lihat Proyek Saya</a>
-                    <a href="#contact" class="btn btn-secondary">Hubungi Saya</a>
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
             </div>
             
-            <!-- Elegant Profile Section -->
             <div class="hero-visual">
                 <div class="profile-container">
                     <div class="profile-glow"></div>
                     <div class="profile-background"></div>
-                    <img src="profil4.png" alt="Muhammad Dzaky Althaf" class="profile-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400&q=80" 
+                         alt="Muhammad Dzaky Althaf" class="profile-image">
                 </div>
             </div>
         </div>
@@ -1256,39 +1326,49 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Keahlian Teknis</h2>
+            <h2 class="section-title">Skills & Expertise</h2>
+            
             <div class="skills-grid">
                 <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <h3>Programming Logic</h3>
-                    <p>Jago analisis algoritma dan problem-solving, suka banget pecahin masalah coding yang complex</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎮</div>
+                    <div class="skill-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
                     <h3>Game Development</h3>
-                    <p>Bikin game seru pake RPG Maker, dan tertarik sama development game 2D/3D</p>
+                    <p>Specialized in creating engaging games using modern game engines and development frameworks with focus on user experience and performance optimization.</p>
                 </div>
+                
                 <div class="skill-card">
-                    <div class="skill-icon">🔧</div>
-                    <h3>Embedded Systems</h3>
-                    <p>Pengalaman bikin project IoT pake Arduino, kayak smart lamp dan automation systems</p>
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Software Engineering</h3>
+                    <p>Expert in building scalable applications using best practices in software architecture, design patterns, and agile development methodologies.</p>
                 </div>
+                
                 <div class="skill-card">
-                    <div class="skill-icon">💡</div>
-                    <h3>Creative Problem Solving</h3>
-                    <p>Selalu cari cara kreatif untuk solve technical challenges dengan approach yang unik</p>
+                    <div class="skill-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Integration</h3>
+                    <p>Implementing artificial intelligence and machine learning solutions to enhance gaming experiences and software functionality.</p>
                 </div>
             </div>
             
             <div class="technologies">
-                <h3>Teknologi & Bahasa yang Dikuasai</h3>
+                <h3>Technologies & Tools</h3>
                 <div class="tech-tags">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">HTML/CSS</span>
-                    <span class="tech-tag">Arduino</span>
-                    <span class="tech-tag">RPG Maker</span>
+                    <span class="tech-tag">Unity</span>
+                    <span class="tech-tag">Unreal Engine</span>
                     <span class="tech-tag">C++</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Blender</span>
+                    <span class="tech-tag">Photoshop</span>
                     <span class="tech-tag">Git</span>
+                    <span class="tech-tag">Docker</span>
                 </div>
             </div>
         </div>
@@ -1297,36 +1377,23 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Proyek Saya</h2>
+            <h2 class="section-title">Featured Projects</h2>
+            
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="rpg-game.jpg" alt="RPG Maker Game Project">
+                        <div class="coming-soon">Coming Soon</div>
                     </div>
                     <div class="project-header">
-                        <h3>RPG Adventure Game</h3>
-                        <span class="project-badge">RPG Maker</span>
+                        <h3>Immersive RPG Game</h3>
+                        <span class="project-badge">In Development</span>
                     </div>
-                    <p>Game RPG 2D dengan cerita yang immersive, dibuat menggunakan RPG Maker dengan custom scripting dan seputar kuis</p>
+                    <p>A next-generation role-playing game featuring advanced AI NPCs, dynamic storytelling, and stunning visual effects built with Unreal Engine 5.</p>
                     <div class="project-features">
-                        <span>Story-driven</span>
-                        <span>Custom Events</span>
-                        <span>Quiz</span>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="smart-lamp.jpg" alt="Smart Lamp Arduino Project">
-                    </div>
-                    <div class="project-header">
-                        <h3>Smart Lamp IoT</h3>
-                        <span class="project-badge">Arduino</span>
-                    </div>
-                    <p>Lampu pintar berbasis Arduino dengan sensor suara</p>
-                    <div class="project-features">
-                        <span>IoT Technology</span>
-                        <span>Sound Sensor</span>
+                        <span>Unreal Engine 5</span>
+                        <span>C++</span>
+                        <span>AI Integration</span>
+                        <span>Multiplayer</span>
                     </div>
                 </div>
                 
@@ -1335,14 +1402,34 @@
                         <div class="coming-soon">Coming Soon</div>
                     </div>
                     <div class="project-header">
-                        <h3>Next Project</h3>
-                        <span class="project-badge">On Progress</span>
+                        <h3>Mobile Strategy Game</h3>
+                        <span class="project-badge">In Development</span>
                     </div>
-                    <p>Sedang mengembangkan project game atau software berikutnya. Stay tuned untuk update selanjutnya!</p>
+                    <p>Cross-platform mobile strategy game with real-time multiplayer capabilities and social features, developed using Unity.</p>
                     <div class="project-features">
-                        <span>In Development</span>
-                        <span>Innovative Idea</span>
-                        <span>Coming Soon</span>
+                        <span>Unity</span>
+                        <span>C#</span>
+                        <span>Mobile</span>
+                        <span>Multiplayer</span>
+                        <span>Cloud Save</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="coming-soon">Coming Soon</div>
+                    </div>
+                    <div class="project-header">
+                        <h3>AI-Powered Game Analytics</h3>
+                        <span class="project-badge">Planning</span>
+                    </div>
+                    <p>Comprehensive analytics platform for game developers featuring predictive analytics, player behavior analysis, and performance monitoring.</p>
+                    <div class="project-features">
+                        <span>Python</span>
+                        <span>Machine Learning</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Data Visualization</span>
                     </div>
                 </div>
             </div>
@@ -1352,38 +1439,55 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
             <div class="about-grid">
                 <div class="about-content">
-                    <h2 class="section-title">Cerita Saya</h2>
                     <p class="about-text">
-                        Halo! Saya Muhammad Dzaky Althaf, mahasiswa Teknik Informatika di Universitas Negeri Semarang yang punya passion besar di dunia programming dan game development.
+                        Hello! I'm Muhammad Dzaky Althaf, a passionate game developer and software engineering student 
+                        currently pursuing my bachelor's degree in Informatics Engineering at Universitas Pendidikan Nasional.
                     </p>
+                    
                     <p class="about-text">
-                        Perjalanan saya dimulai dari SMA Negeri 1 Tayu, dan sekarang sedang mengejar impian jadi Game Developer yang handal. Saya suka banget ngulik algoritma dan bikin solusi kreatif untuk masalah teknis.
+                        My journey in technology began with a fascination for how games and software can create meaningful 
+                        experiences and solve real-world problems. This passion has driven me to continuously learn and 
+                        experiment with new technologies, from game engines to artificial intelligence.
                     </p>
+                    
                     <p class="about-text">
-                        Dari bikin game pake RPG Maker sampe project IoT dengan Arduino, saya selalu excited untuk explore teknologi baru dan turning ideas into reality through code.
+                        When I'm not coding or studying, you can find me exploring new game mechanics, contributing to 
+                        open-source projects, or sharing knowledge with the developer community. I believe in the power 
+                        of technology to create positive change and am always excited to take on new challenges.
                     </p>
+                    
                     <div class="about-cta">
-                        <p><strong>Yuk kolaborasi bikin sesuatu yang keren!</strong></p>
+                        <p>🚀 Currently working on exciting new projects and open to collaboration opportunities!</p>
                     </div>
                 </div>
+                
                 <div class="about-visual">
                     <div class="visual-card">
                         <h3>Journey Timeline</h3>
                         <div class="timeline">
                             <div class="timeline-item">
-                                <div class="timeline-year">2025 - Sekarang</div>
+                                <div class="timeline-year">2023 - Present</div>
                                 <div class="timeline-content">
-                                    <strong>Universitas Negeri Semarang</strong>
-                                    <p>Teknik Informatika</p>
+                                    <strong>University Studies</strong>
+                                    <p>Bachelor's in Informatics Engineering</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-year">2022 - 2025</div>
+                                <div class="timeline-year">2022 - 2023</div>
                                 <div class="timeline-content">
-                                    <strong>SMA Negeri 1 Tayu</strong>
-                                    <p>Science Technology</p>
+                                    <strong>Game Dev Foundation</strong>
+                                    <p>Mastered Unity & Unreal Engine basics</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2021 - 2022</div>
+                                <div class="timeline-content">
+                                    <strong>Coding Journey Begins</strong>
+                                    <p>Started with Python and C++</p>
                                 </div>
                             </div>
                         </div>
@@ -1396,11 +1500,12 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Yuk Connect!</h2>
+            <h2 class="section-title">Get In Touch</h2>
+            
             <div class="contact-content">
                 <div class="contact-text">
-                    <h3>Mari Berkolaborasi</h3>
-                    <p>Saya selalu terbuka untuk diskusi project game development, programming, atau sekadar ngobrol tentang teknologi. Jangan ragu buat hubungi saya lewat media sosial berikut!</p>
+                    <h3>Let's Create Something Amazing Together</h3>
+                    <p>I'm always interested in new opportunities, collaborations, and discussions about game development and technology.</p>
                 </div>
                 
                 <div class="contact-cards">
@@ -1410,8 +1515,8 @@
                         </div>
                         <div class="contact-info">
                             <h4>Instagram</h4>
-                            <p>Follow dan DM saya</p>
-                            <a href="https://instagram.com/dzaky_althaf_" class="contact-link" target="_blank">@dzaky_althaf_</a>
+                            <p>Follow for updates and behind-the-scenes</p>
+                            <a href="https://instagram.com/dzakyalthaf" class="contact-link" target="_blank">@dzakyalthaf</a>
                         </div>
                     </div>
                     
@@ -1421,8 +1526,8 @@
                         </div>
                         <div class="contact-info">
                             <h4>WhatsApp</h4>
-                            <p>Chat langsung</p>
-                            <a href="https://wa.me/62895424023467" class="contact-link" target="_blank">0895424023467</a>
+                            <p>Quick conversations and collaboration</p>
+                            <a href="https://wa.me/6281234567890" class="contact-link" target="_blank">+62 812-3456-7890</a>
                         </div>
                     </div>
                     
@@ -1432,14 +1537,14 @@
                         </div>
                         <div class="contact-info">
                             <h4>Email</h4>
-                            <p>Kirim email</p>
-                            <a href="mailto:althafjepat@gmail.com" class="contact-link" target="_blank">althafjepat@gmail.com</a>
+                            <p>For detailed discussions and proposals</p>
+                            <a href="mailto:dzaky.althaf@email.com" class="contact-link">dzaky.althaf@email.com</a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-cta">
-                    <p><strong>Jangan sungkan buat reach out! Saya senang banget bisa kenal dan kolaborasi dengan kalian semua! 😊</strong></p>
+                    <p>💡 <strong>Pro Tip:</strong> Feel free to reach out even if you just want to chat about game development, technology trends, or potential collaborations. I'm always happy to connect with fellow developers and enthusiasts!</p>
                 </div>
             </div>
         </div>
@@ -1450,37 +1555,95 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <span class="logo-text">D</span>
-                    <span>Dzaky</span>
+                    <div class="logo-text">MA</div>
+                    <div>Muhammad Dzaky Althaf</div>
                 </div>
-                <p class="footer-text">Building dreams through code and creativity</p>
+                <p class="footer-text">Game Developer & Software Engineer</p>
+                
                 <div class="footer-links">
                     <a href="#home">Home</a>
-                    <a href="#skills">Keahlian</a>
-                    <a href="#projects">Proyek</a>
-                    <a href="#about">Tentang</a>
-                    <a href="#contact">Kontak</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
                 </div>
+                
                 <div class="social-links">
-                    <a href="https://instagram.com/dzaky_althaf_" class="social-link" target="_blank">
+                    <a href="https://instagram.com/dzakyalthaf" class="social-link" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://wa.me/62895424023467" class="social-link" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://github.com/dzakyalthaf" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
                     </a>
-                    <a href="mailto:althafjepat@gmail.com" class="social-link" target="_blank">
-                        <i class="fas fa-envelope"></i>
+                    <a href="https://linkedin.com/in/dzakyalthaf" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/dzakyalthaf" class="social-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Muhammad Dzaky Althaf. Mahasiswa Teknik Informatika UNNES.</p>
+                <p>&copy; 2024 Muhammad Dzaky Althaf. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
     <script>
-        // Smooth scrolling for navigation links
+        // Loading Screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1494,7 +1657,19 @@
             });
         });
 
-        // Simple scroll animation
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Add animation to elements when they come into view
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1503,30 +1678,16 @@
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         // Observe elements for animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const animateElements = document.querySelectorAll('.skill-card, .project-card, .contact-card');
-            
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        });
-
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+        document.querySelectorAll('.skill-card, .project-card, .contact-card').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
         });
     </script>
 </body>
